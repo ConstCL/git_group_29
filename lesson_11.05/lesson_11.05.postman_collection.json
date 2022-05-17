@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "88002880-4161-4b0b-8694-66f10c644143",
+		"name": "lesson_11.05",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let user_token = jsonData.token;\r",
+							"pm.environment.set(\"token\", user_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "Kostya",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "13516ewfEE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "salary_calc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});     \r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"let salary_check_12 = jsonData.person.u_name[1] * 2.9;\r",
+							"let salary_12 = jsonData.qa_salary_after_12_months;\r",
+							"\r",
+							"console.log(salary_12);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    pm.expect(salary_12).to.eql(salary_check_12);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/user_info?age=30&salary=3000&name=Kostya&auth_token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"user_info"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "salary",
+							"value": "3000"
+						},
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "auth_token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
