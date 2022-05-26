@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "9239aa79-1c83-4b1c-83c1-76dac76e5f94",
+		"name": "HW2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19349351"
+	},
+	"item": [
+		{
+			"name": "EP1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/get_method?name=Kostya&age=30",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"get_method"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_1?name=Kostya&age=30&weight=80",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "weight",
+							"value": "80"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_2?name=Kostya&age=30&salary=8000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "salary",
+							"value": "8000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let person = {\r",
+							"    \"age\": \"30\",\r",
+							"    \"family\": {\r",
+							"        \"children\": [\r",
+							"            [\r",
+							"                \"Alex\",\r",
+							"                24\r",
+							"            ],\r",
+							"            [\r",
+							"                \"Kate\",\r",
+							"                12\r",
+							"            ]\r",
+							"        ],\r",
+							"        \"pets\": {\r",
+							"            \"cat\": {\r",
+							"                \"age\": 3,\r",
+							"                \"name\": \"Sunny\"\r",
+							"            },\r",
+							"            \"dog\": {\r",
+							"                \"age\": 4,\r",
+							"                \"name\": \"Luky\"\r",
+							"            }\r",
+							"        },\r",
+							"        \"u_salary_1_5_year\": 32000\r",
+							"    },\r",
+							"    \"name\": \"Kostya\",\r",
+							"    \"salary\": 8000\r",
+							"}\r",
+							"\r",
+							"\r",
+							"let jsonData = pm.response.json()\r",
+							"console.log(jsonData)\r",
+							"\r",
+							"// let query = {}; pm.request.url.query.all().forEach((param) => { query[param.key] = param.value});\r",
+							"let query = pm.request.url.query.toObject() // спарсили request \r",
+							"console.log(query.name)\r",
+							"\r",
+							"pm.test(\"Name test\", function () {\r",
+							"    pm.expect(query.name).to.eql(jsonData.name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Dog has name\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog).to.have.property('name')\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name include Lucky\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog.name).to.include('Luky')\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Kostya&age=30&salary=8000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "salary",
+							"value": "8000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Kostya&age=30&salary=8000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Kostya"
+						},
+						{
+							"key": "age",
+							"value": "30"
+						},
+						{
+							"key": "salary",
+							"value": "8000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Kostya",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3000",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "30",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"let query = request.data\r",
+							"console.log(query.salary)\r",
+							"\r",
+							"pm.test(\"Name test\", function () {\r",
+							"    pm.expect(query.name).to.eql(jsonData.name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Age test\", function () {\r",
+							"    pm.expect(query.age).to.eql(jsonData.age);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salary test\", function () {\r",
+							"    pm.expect(+query.salary).to.eql(jsonData.salary);\r",
+							"});\r",
+							"\r",
+							"console.log(jsonData.family)\r",
+							"\r",
+							"pm.test(\"Salary 15 year\", function () {\r",
+							"    pm.expect(+query.salary*4).to.eql(jsonData.family.u_salary_1_5_year);\r",
+							"});\r",
+							"console.log(jsonData.family.u_salary_1_5_year)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Kostya",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3000",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "30",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
